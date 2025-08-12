@@ -185,15 +185,15 @@ namespace CargoWiseNoter
 		{
 			if (_currentNoteWindow != null)
 				return;
-			NoteModel currentNote;
+			List<NoteModel> currentNotes;
 			if (_data.Notes.ContainsKey(_currentTitle))
-				currentNote = _data.Notes[_currentTitle];
+				currentNotes = _data.Notes[_currentTitle];
 			else
-				currentNote = new NoteModel();
+				currentNotes = new List<NoteModel>() { new NoteModel() { Title = "New Note" } };
 
-			_currentNoteWindow = new NoteWindow(_currentTitle, currentNote, (n) =>
+			_currentNoteWindow = new NoteWindow(_currentTitle, currentNotes, (n) =>
 			{
-				_data.Notes[n.ViewModel.NoteKey] = n.ViewModel.CurrentNote;
+				_data.Notes[n.ViewModel.NoteKey] = n.ViewModel.CurrentNotes;
 				_data.NoteWindowWidth = n.Width;
 				_data.NoteWindowHeight = n.Height;
 				SaveData();

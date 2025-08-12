@@ -25,11 +25,11 @@ namespace CargoWiseNoter.Views
 		public NoteWindowViewModel ViewModel { get; set; }
 		private readonly Action<NoteWindow> _doSave;
 
-		public NoteWindow(string noteKey, NoteModel note, Action<NoteWindow> doSave, double width, double height)
+		public NoteWindow(string noteKey, List<NoteModel> notes, Action<NoteWindow> doSave, double width, double height)
 		{
 			_doSave = doSave;
 			DataContext = this;
-			ViewModel = new NoteWindowViewModel(noteKey, note);
+			ViewModel = new NoteWindowViewModel(noteKey, notes);
 			InitializeComponent();
 			Width = width;
 			Height = height;
@@ -38,5 +38,27 @@ namespace CargoWiseNoter.Views
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => _doSave.Invoke(this);
 
 		private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
+
+		private void DeleteNoteButton_Click(object sender, RoutedEventArgs e)
+		{
+			ViewModel.CurrentNotes.Remove(ViewModel.CurrentNote);
+			if (ViewModel.CurrentNotes.Count == 0)
+				ViewModel.CurrentNotes.Add(new NoteModel() { Title = "New Note" });
+			ViewModel.CurrentNotes = new List<NoteModel>(ViewModel.CurrentNotes);
+			ViewModel.CurrentNote = ViewModel.CurrentNotes[0];
+		}
+
+		private void AddNoteButton_Click(object sender, RoutedEventArgs e)
+		{
+			var newNote = new NoteModel() { Title = "New Note" };
+			ViewModel.CurrentNotes.Add(newNote);
+			ViewModel.CurrentNotes = new List<NoteModel>(ViewModel.CurrentNotes);
+			ViewModel.CurrentNote = newNote;
+		}
+
+		private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			ViewModel.CurrentNotes = new List<NoteModel>(ViewModel.CurrentNotes);
+		}
 	}
 }

@@ -10,6 +10,6 @@ namespace CargoWiseNoter.Models
 	{
 		public double NoteWindowWidth { get; set; } = 300;
 		public double NoteWindowHeight { get; set; } = 500;
-		public Dictionary<string, NoteModel> Notes { get; set; } = new Dictionary<string, NoteModel>();
+		public Dictionary<string, List<NoteModel>> Notes { get; set; } = new Dictionary<string, List<NoteModel>>();
 	}
 }

@@ -7,7 +7,7 @@
         xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"
         xmlns:local="clr-namespace:CargoWiseNoter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="50" Width="50" WindowStyle="None" Topmost="True" Background="Transparent" ResizeMode="NoResize" AllowsTransparency="True" ShowInTaskbar="False" Visibility="Hidden" Loaded="Window_Loaded">
+        Title="MainWindow" Height="50" Width="50" WindowStyle="None" Topmost="True" Background="Transparent" ResizeMode="NoResize" AllowsTransparency="True" ShowInTaskbar="False" Loaded="Window_Loaded">
     <Window.Resources>
         <Image x:Key="MyImage"
                Source="pack://application:,,,/Assets/icon.png" />

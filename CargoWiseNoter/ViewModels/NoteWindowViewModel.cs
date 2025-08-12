@@ -14,12 +14,16 @@ namespace CargoWiseNoter.ViewModels
 		private string _noteKey;
 
 		[ObservableProperty]
+		private List<NoteModel> _currentNotes;
+
+		[ObservableProperty]
 		private NoteModel _currentNote;
 
-		public NoteWindowViewModel(string noteKey, NoteModel currentNote)
+		public NoteWindowViewModel(string noteKey, List<NoteModel> currentNotes)
 		{
 			_noteKey = noteKey;
-			_currentNote = currentNote;
+			_currentNotes = currentNotes;
+			_currentNote = currentNotes[0];
 		}
 	}
 }

@@ -15,8 +15,10 @@
         WindowStyle="None">
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
-            <RowDefinition Height="35" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid>
@@ -25,17 +27,49 @@
                 <ColumnDefinition Width="35" />
             </Grid.ColumnDefinitions>
             <Label Foreground="Gray"
+                   VerticalAlignment="Center"
                    Content="{Binding ViewModel.NoteKey}" />
             <ui:Button Grid.Column="1"
                        x:Name="CloseButton"
                        Grid.Row="2"
-                       Content="X"
-                       Appearance="Danger"
+                       Content="v"
+                       Appearance="Primary"
                        Click="CloseButton_Click" />
         </Grid>
-        <ui:TextBox Grid.Row="1"
-                    Text="{Binding ViewModel.CurrentNote.Title, Mode=TwoWay}" />
-        <ui:TextBox Grid.Row="2"
+
+        <Separator Grid.Row="1"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+            <ui:Button
+                       x:Name="AddNoteButton"
+                       Content="+"
+                       Appearance="Success"
+                        Foreground="White"
+                       Click="AddNoteButton_Click"
+                       Margin="2" />
+            <ComboBox Grid.Column="1"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding ViewModel.CurrentNotes, Mode=TwoWay}"
+                      SelectedItem="{Binding ViewModel.CurrentNote, Mode=TwoWay,BindsDirectlyToSource=True}"
+                      Margin="2" />
+            <ui:Button Grid.Column="2"
+                       x:Name="DeleteNoteButton"
+                       Grid.Row="2"
+                       Foreground="White"
+                       Content="X"
+                       Appearance="Danger"
+                       Click="DeleteNoteButton_Click"
+                       Margin="2"/>
+        </Grid>
+        <ui:TextBox Grid.Row="3"
+                    Margin="2"
+                    Text="{Binding ViewModel.CurrentNote.Title, Mode=TwoWay}" TextChanged="TextBox_TextChanged" />
+        <ui:TextBox Grid.Row="4"
+                    Margin="2"
                     Text="{Binding ViewModel.CurrentNote.Note, Mode=TwoWay}"
                     TextWrapping="Wrap"
                     AcceptsReturn="True"
